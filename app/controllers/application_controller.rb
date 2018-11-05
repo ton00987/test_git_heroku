@@ -1,9 +1,8 @@
 class ApplicationController < ActionController::Base
-  before_action :set_current_user
-  protected # prevents method from being invoked by a route
-  def set_current_user
-    # we exploit the fact that find_by_id(nil) returns nil
-    @current_user ||= Moviegoer.find_by_id(session[:user_id])
-    # redirect_to login_path("github") and return unless @current_user
+  protect_from_forgery with: :exception
+  helper_method :current_user
+
+  def current_user
+    session[:user_id].nil? ? nil : Moviegoer.find(session[:user_id])
   end
 end

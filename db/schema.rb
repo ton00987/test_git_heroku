@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_053348) do
+ActiveRecord::Schema.define(version: 2018_11_05_141902) do
 
   create_table "moviegoers", force: :cascade do |t|
-    t.string "name"
-    t.string "provider"
+    t.string "username"
+    t.string "avatar_url"
+    t.string "email"
     t.string "uid"
+    t.string "provider"
+    t.string "oauth_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

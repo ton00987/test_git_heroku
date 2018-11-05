@@ -1,9 +1,12 @@
 class CreateMoviegoers < ActiveRecord::Migration[5.2]
   def change
     create_table :moviegoers do |t|
-      t.string :name
-      t.string :provider
+      t.string :username
+      t.string :avatar_url
+      t.string :email
       t.string :uid
+      t.string :provider
+      t.string :oauth_token
 
       t.timestamps
     end

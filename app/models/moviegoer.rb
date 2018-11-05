@@ -1,13 +1,13 @@
-class Moviegoer < ActiveRecord::Base
-  def self.create_with_omniauth(auth)
-    Moviegoer.create!(
-      :provider => auth["provider"],
-      :uid => auth["uid"],
-      :name => auth["info"]["name"])
-  end
-  
-    private
-    def moviegoer_params
-        params.require(:moviegoer).permit(:uid, :provider, :name)
+class Moviegoer < ApplicationRecord
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.email = auth.info.email
+      user.uid = auth.uid
+      user.provider = auth.provider
+      user.avatar_url = auth.info.image
+      user.username = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.save!
     end
+  end
 end
