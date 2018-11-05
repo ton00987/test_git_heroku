@@ -1,5 +1,5 @@
 <% # in _movie_form.html.erb (the partial) %>
-<% unless @movie.errors.empty? %>
+<% @movie.nil? || unless @movie.errors.empty? %>
   <div id="warning">
     <%= "Errors prevented this movie from being #{ controller.action_name }d:" %>
     <ul>

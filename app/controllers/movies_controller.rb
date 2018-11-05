@@ -19,6 +19,9 @@ class MoviesController < ApplicationController
   end
   
   def create
+    puts "-----------------------"
+    puts movie_params
+    puts "-----------------------"
     @movie = Movie.new(movie_params)
     if @movie.save
       flash[:notice] = "#{@movie.title} was successfully created."
@@ -47,6 +50,13 @@ class MoviesController < ApplicationController
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."
     redirect_to movies_path
+  end
+  
+  def movies_with_filters
+    @movies = Movie.with_good_reviews(params[:threshold])
+    %w(for_kids with_many_fans recently_reviewed).each do |filter|
+      @movies = @movies.send(filter) if params[filter]
+    end
   end
   
   private

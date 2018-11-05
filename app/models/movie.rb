@@ -1,5 +1,8 @@
 class Movie < ActiveRecord::Base
+  has_many :reviews
+  
   def self.all_ratings ; %w[G PG PG-13 R NC-17] ; end #  shortcut: array of strings
+  
   validates :title, :presence => true
   validates :release_date, :presence => true
   validate :released_1930_or_later # uses custom validator below
@@ -21,6 +24,15 @@ class Movie < ActiveRecord::Base
     self.title = self.title.split(/\s+/).map(&:downcase).
       map(&:capitalize).join(' ')
   end
+  
+  scope :with_good_reviews, lambda { |threshold|
+    Movie.joins(:reviews).group(:movie_id).
+      having(['AVG(reviews.potatoes) > ?', threshold])
+  }
+  
+  scope :for_kids, lambda {
+    Movie.where('rating in ?', %w(G PG))
+  }
   private
     def movie_params
       params.require(:movie).permit(:title, :rating, :description, :release_date)
