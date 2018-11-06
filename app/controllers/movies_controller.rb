@@ -19,9 +19,6 @@ class MoviesController < ApplicationController
   end
   
   def create
-    puts "-----------------------"
-    puts movie_params
-    puts "-----------------------"
     @movie = Movie.new(movie_params)
     if @movie.save
       flash[:notice] = "#{@movie.title} was successfully created."

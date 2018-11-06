@@ -1,7 +1,7 @@
-Feature: User can see movies in homepage
+Feature: User can see all movies in homepage
   
   As moviegoer who first come to this website
-  I should see many movies in homepage
+  I should see all movies in homepage
 
 Background: Movies have been add to database.
   

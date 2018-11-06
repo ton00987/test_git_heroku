@@ -1,19 +1,11 @@
 module NavigationHelpers
-  # Maps a name to a path. Used by the
-  #
-  #   When /^I go to (.+)$/ do |page_name|
-  #
-  # step definition in web_steps.rb
-  #
   def path_to(page_name)
     case page_name
 
     when /^the (RottenPotatoes )?home\s?page$/ then '/movies'
     when /^the movies page$/ then '/movies'
-
-    when /the edit page for "(.*)"$/
-      edit_movie_path(Movie.find_by_title($1)[:id])
-
+    when /^the Create New Movie page$/ then '/movies/new'
+    # when /^the Edit Movie page$/ then /^\/movies\/(\d)$/
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
