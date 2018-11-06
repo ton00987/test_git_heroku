@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root :to => redirect('/movies')
   get 'login', to: 'sessions#index'
   get 'login_github', to: redirect('/auth/github')
+  get 'login_facebook', to: redirect('/auth/facebook')
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout' => 'sessions#destroy'
   get 'auth/failure' => 'sessions#failure'

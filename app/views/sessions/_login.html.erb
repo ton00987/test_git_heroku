@@ -3,6 +3,7 @@
 <% if current_user.blank? %>
   <p class="login">
       <%= link_to 'Log in with Github', login_github_path %>
+      <%= link_to 'Log in with Facebook', login_facebook_path %>
     </p>
 <% else %>
   <p class="welcome">

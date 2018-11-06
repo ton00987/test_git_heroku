@@ -1,0 +1,1 @@
+rails s -b 'ssl://0.0.0.0:8080?key=storage/localhost.key&cert=storage/localhost.crt'
